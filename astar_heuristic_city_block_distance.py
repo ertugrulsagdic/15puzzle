@@ -8,20 +8,40 @@ def heuristic_city_block_distance(puzzle):
     
     return total_distance
 
+
+def calculate_g(path):
+    g = 0
+    for i in range(len(path)):
+        if i + 1 == len(path) - 1:
+            break
+        #print(i)
+        x = path[i+1].get_coordinate(0)[0] - path[i].get_coordinate(0)[0]
+        y = path[i+1].get_coordinate(0)[1] - path[i].get_coordinate(0)[1]
+        if (x, y) == (1, 0) or (x, y) == (0, 1) or (x, y) == (-1, 0) or (x, y) == (0, -1):
+            g += 1
+        else:
+            g += 3
+        
+
+    return g
+
+
+
 def astar(puzzle):
     expanded = []
-    queue = [[heuristic_city_block_distance(puzzle), puzzle]]
+    frontier = [[heuristic_city_block_distance(puzzle), puzzle]]
 
     path = None
     num_expanded_nodes = 0
-    while queue:
+    while frontier:
         i = 0
-        for j in range(i, len(queue)):
-            if queue[i][0] > queue[j][0]:
+        for j in range(1, len(frontier)):
+            if frontier[i][0] > frontier[j][0]:
                 i = j
         
-        path = queue[i]
-        queue = queue[:i] + queue[i+1:]
+        path = frontier[i]
+        # first i elements // after the i+1
+        frontier = frontier[:i] + frontier[i+1:]
         end_state = path[-1]
 
 
@@ -36,13 +56,18 @@ def astar(puzzle):
         
         actions = end_state.get_possible_actions()
         for action in actions:
-            if action.puzzle in expanded:
+            if action[0].puzzle in expanded:
                 continue
 
-            path2 = [path[0] + (heuristic_city_block_distance(action) - heuristic_city_block_distance(end_state))] + path[1:] + [action]
-            
+            #print(path[1:])
+            g = calculate_g(path[1:] + [action[0]])
+            #print('-', g)
+            path2 = [ g + heuristic_city_block_distance(action[0]) ] + path[1:] + [action[0]]
+            #print(path[0], heuristic_city_block_distance(action[0]), heuristic_city_block_distance(end_state))
+            #print(path2)
             expanded.append(end_state.puzzle)
-            queue.append(path2)
+            frontier.append(path2)
+            #print(frontier)
         num_expanded_nodes += 1
 
         print(num_expanded_nodes)
