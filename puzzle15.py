@@ -72,6 +72,7 @@ class Puzzle15:
 
 
     def render(self):
+        print()
         for i in range(self.number_of_rows):
             for j in range(self.number_of_columns):
                 if self.puzzle[i][j] < 10:
