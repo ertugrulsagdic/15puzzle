@@ -8,11 +8,18 @@ class Puzzle15:
         self.goal_state = goal_state
 
     def get_coordinate(self, tile):
-
         for i in range(0, self.number_of_rows):
             for j in range(0, self.number_of_columns):
                 if self.puzzle[i][j] == tile:
                     return i, j
+    
+    def distance_to_goal_state(self, tile):
+        x1, y1 = get_coordinate(tile)
+        for x in range(0, self.number_of_rows):
+            for y in range(0, self.number_of_columns):
+                if self.goal_state[x][y] == tile:
+                    return abs(x - x1) + abs(y - y1)
+
 
     def copy_puzzle(self):
         copy_puzzle = []
