@@ -42,28 +42,28 @@ class Puzzle15:
 
         # UP
         if x > 0:
-            actions.append(Puzzle15(self.swap(x, y, x-1, y)))
+            actions.append((Puzzle15(self.swap(x, y, x-1, y)), 1))
         # DOWN
         if x < (self.number_of_rows - 1):
-            actions.append(Puzzle15(self.swap(x, y, x+1, y)))
+            actions.append( (Puzzle15(self.swap(x, y, x+1, y)), 1)  )
         # LEFT
         if y > 0:
-            actions.append(Puzzle15(self.swap(x, y, x, y-1)))
+            actions.append((Puzzle15(self.swap(x, y, x, y-1)), 1))
         # RIGHT
         if y < (self.number_of_columns - 1):
-            actions.append(Puzzle15(self.swap(x, y, x, y+1)))
+            actions.append((Puzzle15(self.swap(x, y, x, y+1)), 1))
         # UP - LEFT
         if x > 0 and y > 0:
-            actions.append(Puzzle15(self.swap(x, y, x-1, y-1)))
+            actions.append((Puzzle15(self.swap(x, y, x-1, y-1)), 3))
         # DOWN - LEFT
         if x < (self.number_of_rows - 1) and y > 0:
-            actions.append(Puzzle15(self.swap(x, y, x+1, y-1)))
+            actions.append((Puzzle15(self.swap(x, y, x+1, y-1)), 3))
         # UP - RIGHT
         if x > 0 and y < (self.number_of_columns - 1):
-            actions.append(Puzzle15(self.swap(x, y, x-1, y+1)))
+            actions.append((Puzzle15(self.swap(x, y, x-1, y+1)), 3))
         # DOWN - RIGHT
         if x < (self.number_of_rows - 1) and y < (self.number_of_columns - 1):
-            actions.append(Puzzle15(self.swap(x, y, x+1, y+1)))
+            actions.append((Puzzle15(self.swap(x, y, x+1, y+1)), 3))
         
         return actions
         
@@ -87,6 +87,6 @@ puzzle = Puzzle15(puzzle=[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 
 puzzle.render()
 
 actions = puzzle.get_possible_actions()
-for i in actions:
-    print(i)
-    i.render()
+for action in actions:
+    print(action)
+    action[0].render()
