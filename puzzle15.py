@@ -14,7 +14,7 @@ class Puzzle15:
                     return i, j
     
     def distance_to_goal_state(self, tile):
-        x1, y1 = get_coordinate(tile)
+        x1, y1 = self.get_coordinate(tile)
         for x in range(0, self.number_of_rows):
             for y in range(0, self.number_of_columns):
                 if self.goal_state[x][y] == tile:
