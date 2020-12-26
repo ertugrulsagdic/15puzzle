@@ -1,5 +1,5 @@
 class Puzzle15:
-    def __init__(self, puzzle=[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]], goal_state=[[1, 2, 3, 4], [12, 13, 14, 5], [11, 0, 15, 6], [10, 9, 8, 7]]):
+    def __init__(self, puzzle, goal_state):
         self.puzzle = puzzle
         self.number_of_rows = len(puzzle)
         self.number_of_columns = len(puzzle[0])
@@ -42,28 +42,28 @@ class Puzzle15:
 
         # UP
         if x > 0:
-            actions.append((Puzzle15(self.swap(x, y, x-1, y)), 1))
+            actions.append((Puzzle15(self.swap(x, y, x-1, y), self.goal_state), 1))
         # DOWN
         if x < (self.number_of_rows - 1):
-            actions.append( (Puzzle15(self.swap(x, y, x+1, y)), 1)  )
+            actions.append( (Puzzle15(self.swap(x, y, x+1, y), self.goal_state), 1)  )
         # LEFT
         if y > 0:
-            actions.append((Puzzle15(self.swap(x, y, x, y-1)), 1))
+            actions.append((Puzzle15(self.swap(x, y, x, y-1), self.goal_state), 1))
         # RIGHT
         if y < (self.number_of_columns - 1):
-            actions.append((Puzzle15(self.swap(x, y, x, y+1)), 1))
+            actions.append((Puzzle15(self.swap(x, y, x, y+1), self.goal_state), 1))
         # UP - LEFT
         if x > 0 and y > 0:
-            actions.append((Puzzle15(self.swap(x, y, x-1, y-1)), 3))
+            actions.append((Puzzle15(self.swap(x, y, x-1, y-1), self.goal_state), 3))
         # DOWN - LEFT
         if x < (self.number_of_rows - 1) and y > 0:
-            actions.append((Puzzle15(self.swap(x, y, x+1, y-1)), 3))
+            actions.append((Puzzle15(self.swap(x, y, x+1, y-1), self.goal_state), 3))
         # UP - RIGHT
         if x > 0 and y < (self.number_of_columns - 1):
-            actions.append((Puzzle15(self.swap(x, y, x-1, y+1)), 3))
+            actions.append((Puzzle15(self.swap(x, y, x-1, y+1), self.goal_state), 3))
         # DOWN - RIGHT
         if x < (self.number_of_rows - 1) and y < (self.number_of_columns - 1):
-            actions.append((Puzzle15(self.swap(x, y, x+1, y+1)), 3))
+            actions.append((Puzzle15(self.swap(x, y, x+1, y+1), self.goal_state), 3))
         
         return actions
         
@@ -83,10 +83,10 @@ class Puzzle15:
 
 
 
-puzzle = Puzzle15(puzzle=[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]], goal_state=[[1, 2, 3, 4], [12, 13, 14, 5], [11, 0, 15, 6], [10, 9, 8, 7]])
-puzzle.render()
+# puzzle = Puzzle15(puzzle=[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]], goal_state=[[1, 2, 3, 4], [12, 13, 14, 5], [11, 0, 15, 6], [10, 9, 8, 7]])
+# puzzle.render()
 
-actions = puzzle.get_possible_actions()
-for action in actions:
-    print(action)
-    action[0].render()
+# actions = puzzle.get_possible_actions()
+# for action in actions:
+#     print(action)
+#     action[0].render()
