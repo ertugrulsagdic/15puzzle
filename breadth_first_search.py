@@ -13,24 +13,12 @@ def bfs_algorithm(puzzle):
             solution_node = current
             break
 
-        # inExpanded = False
-        # for expand in expanded:
-        #     if current == expand:
-        #         inExpanded = True
-
         if isInExpanded(current, expanded):
             continue
 
         expanded.append(current)
         actions = current.state.get_possible_actions()
         for action in actions:
-            # inExpanded = False
-            # for expand in expanded:
-            #     if action[0] == expand:
-            #         inExpanded = True
-
-            # if inExpanded:
-            #     continue
             if isInExpanded(action[0], expanded):
                 continue
 
@@ -50,7 +38,6 @@ def isInExpanded(current, expanded):
             inExpanded = True
 
     return inExpanded
-
 
 def main():
     puzzle = Puzzle15(puzzle=[[4, 1, 2, 3], [5, 6, 7, 11], [8, 9, 10, 15], [
