@@ -10,6 +10,10 @@ def dfs_algorithm(puzzle):
 
     while frontier:
         current = frontier.pop(0)
+        for node in current.path:
+            node.render()
+
+        print("******")
 
         if current.state.puzzle == current.state.goal_state:
             solution_node = current
@@ -27,12 +31,10 @@ def dfs_algorithm(puzzle):
             new_path = current.path + [action[0]]
             temp_frontier.append(Node(parent=current, state=action[0], path=new_path))
 
-        # print(frontier)
-        # print(temp_frontier)
         frontier = temp_frontier + frontier
-        # print(frontier)
         temp_frontier = []
-        # print("----------")
+
+    print("----------")
     print(solution_node.path)
     for node in solution_node.path:
         node.render()
@@ -48,8 +50,8 @@ def isInExpanded(current, expanded):
 
 
 def main():
-    puzzle = Puzzle15(puzzle=[[15, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [
-                      12, 13, 14, 0]], goal_state=[[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15]])
+    puzzle = Puzzle15(puzzle=[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]], goal_state=[[1, 2, 0, 3], [5, 6, 7, 4], [9, 10, 11, 8], [13, 14, 15, 12]])
+
     dfs_algorithm(puzzle)
 
 
