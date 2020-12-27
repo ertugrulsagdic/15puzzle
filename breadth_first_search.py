@@ -1,21 +1,5 @@
 from puzzle15 import *
-
-
-class Node:
-    def __init__(self, parent=None, state=None, path=None):
-        self.parent = parent
-        self.state = state
-        self.path = path
-
-    def __eq__(self, obj):
-        try:
-            if(self.parent == obj.parent and self.state == obj.state):
-                return True
-            else:
-                return False
-        except:
-            return False
-
+from node import *
 
 def bfs_algorithm(puzzle):
     expanded = []
