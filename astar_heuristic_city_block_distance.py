@@ -14,7 +14,13 @@ def astar_algorithm(puzzle):
     expanded = []
     frontier = [Node(None, puzzle, [puzzle], 0, heuristic_city_block_distance(puzzle))]
     solution_node = None
+    max_number_of_nodes_stored = 0
+
     while frontier:
+        #Calculate the maximum number of nodes stored in memory (frontier)
+        if max_number_of_nodes_stored < len(frontier):
+            max_number_of_nodes_stored = len(frontier)
+
         minn = math.inf
         index_of_min = 0
         for i in range(len(frontier)):
@@ -49,9 +55,11 @@ def astar_algorithm(puzzle):
             new_path = current.path + [action[0]]
             frontier.append(Node(parent=current, state=action[0], path=new_path, g=g , h=h))
 
-    print(solution_node.path, len(expanded))
+    print(solution_node.path)
     for node in solution_node.path:
         node.render()
+    print("The total number of expanded nodes : ", len(expanded))
+    print("The maximum number of nodes stored in memory : ", max_number_of_nodes_stored)
 
 def main():
     puzzle = Puzzle15(puzzle=[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]], goal_state=[[1, 2, 3, 4], [12, 13, 14, 5], [11, 0, 15, 6], [10, 9, 8, 7]])
