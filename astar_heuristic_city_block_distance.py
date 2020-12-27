@@ -49,7 +49,7 @@ def astar_algorithm(puzzle):
             new_path = current.path + [action[0]]
             frontier.append(Node(parent=current, state=action[0], path=new_path, g=g , h=h))
 
-    print(solution_node.path)
+    print(solution_node.path, len(expanded))
     for node in solution_node.path:
         node.render()
 
