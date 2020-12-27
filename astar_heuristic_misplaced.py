@@ -11,7 +11,7 @@ def heuristic_misplaced(puzzle):
     
     return total_number_of_misplaced
 
-def astar_algorithm(puzzle):
+def astar_algorithm_misplaced(puzzle):
     expanded = []
     frontier = [Node(None, puzzle, [puzzle], 0, heuristic_misplaced(puzzle))]
     solution_node = None
@@ -63,8 +63,8 @@ def astar_algorithm(puzzle):
     print("The maximum number of nodes stored in memory : ", max_number_of_nodes_stored)
 
 def main():
-    puzzle = Puzzle15(puzzle=[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]], goal_state=[[1, 2, 3, 4], [12, 13, 14, 5], [11, 0, 15, 6], [10, 9, 8, 7]])
-    astar_algorithm(puzzle)
+    puzzle = Puzzle15(puzzle=[[1, 3, 5, 4], [2, 13, 14, 15], [11, 12, 9, 6], [0, 10, 8, 7]], goal_state=[[1, 2, 3, 4], [12, 13, 14, 5], [11, 0, 15, 6], [10, 9, 8, 7]])
+    astar_algorithm_misplaced(puzzle)
 
 if __name__ == '__main__':
     main()
