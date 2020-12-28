@@ -5,8 +5,13 @@ def bfs_algorithm(puzzle):
     expanded = []
     frontier = [Node(None, puzzle, [puzzle])]
     solution_node = None
+    max_number_of_nodes_stored = 0
 
     while frontier:
+        #Calculate the maximum number of nodes stored in memory (frontier)
+        if max_number_of_nodes_stored < len(frontier):
+            max_number_of_nodes_stored = len(frontier)
+
         current = frontier.pop(0)
 
         if current.state.puzzle == current.state.goal_state:
@@ -29,7 +34,8 @@ def bfs_algorithm(puzzle):
     print(solution_node.path)
     for node in solution_node.path:
         node.render()
-
+    print("The total number of expanded nodes : ", len(expanded))
+    print("The maximum number of nodes stored in memory : ", max_number_of_nodes_stored)
 
 def isInExpanded(current, expanded):
     inExpanded = False
