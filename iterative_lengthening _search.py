@@ -48,7 +48,7 @@ def iterative_lengthening_search(puzzle):
 
             current = frontier.pop(index_of_min)
 
-            if (current.length == length_limit):
+            if (current.length >= length_limit):
                 continue
 
             if current.state.puzzle == current.state.goal_state:
@@ -90,8 +90,7 @@ def iterative_lengthening_search(puzzle):
 
 
 def main():
-    puzzle = Puzzle15(puzzle=[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]],
-                      goal_state=[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 0, 14, 15]])
+    puzzle = Puzzle15(puzzle=[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]], goal_state=[[1, 2, 0, 3], [5, 6, 7, 4], [9, 10, 11, 8], [13, 14, 15, 12]])
     iterative_lengthening_search(puzzle)
 
 
