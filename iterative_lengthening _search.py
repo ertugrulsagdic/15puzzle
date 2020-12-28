@@ -1,6 +1,7 @@
 from puzzle15 import *
 import math
 
+
 class Node:
     def __init__(self, parent=None, state=None, path=None, length=0):
         self.parent = parent
@@ -10,18 +11,19 @@ class Node:
 
     def __eq__(self, obj):
         try:
-            if(self.parent == obj.parent and self.state == obj.state):
+            if (self.parent == obj.parent and self.state == obj.state):
                 return True
             else:
                 return False
         except:
             return False
 
+
 def iterative_lengthening_search(puzzle):
     length = 0
     length_limit = 0
     solution_node = None
-    isSolved = False
+    is_solved = False
     number_of_explored_nodes_fei = []
     number_of_nodes_fei = []
 
@@ -50,19 +52,16 @@ def iterative_lengthening_search(puzzle):
                 continue
 
             if current.state.puzzle == current.state.goal_state:
-                isSolved
+                is_solved = True;
                 solution_node = current
                 break
 
-            inExplored = False
+            in_explored = False
             for expand in explored:
                 if current == expand:
-                    inExplored = True
-            if inExplored:
+                    in_explored = True
+            if in_explored:
                 continue
-
-
-
 
             explored.append(current)
             max_number_of_explored_nodes += 1
@@ -75,7 +74,7 @@ def iterative_lengthening_search(puzzle):
                 new_path = current.path + [action[0]]
                 frontier.append(Node(parent=current, state=action[0], path=new_path, length=length))
 
-        if(isSolved):
+        if is_solved:
             print("----------SOLUTION--------")
             print(solution_node.path)
             for node in solution_node.path:
@@ -84,8 +83,11 @@ def iterative_lengthening_search(puzzle):
             number_of_explored_nodes_fei.append(max_number_of_explored_nodes)
             number_of_nodes_fei.append(max_number_of_nodes_stored)
 
+            break
+
         length = 0;
         length_limit += 1
+
 
 def main():
     puzzle = Puzzle15(puzzle=[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]],
@@ -95,5 +97,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
