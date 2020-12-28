@@ -30,7 +30,6 @@ def iterative_lengthening_search(puzzle):
     while 1:
         explored = []
         frontier = [Node(None, puzzle, [puzzle], length)]
-        max_number_of_explored_nodes = 0
         max_number_of_nodes_stored = 0
 
         while frontier:
@@ -64,7 +63,6 @@ def iterative_lengthening_search(puzzle):
                 continue
 
             explored.append(current)
-            max_number_of_explored_nodes += 1
             actions = current.state.get_possible_actions()
             for action in actions:
                 if current.parent == None:
@@ -80,10 +78,12 @@ def iterative_lengthening_search(puzzle):
             for node in solution_node.path:
                 node.render()
 
-            number_of_explored_nodes_fei.append(max_number_of_explored_nodes)
-            number_of_nodes_fei.append(max_number_of_nodes_stored)
-
+            print("The total number of expanded nodes : ", len(explored))
+            print("The maximum number of nodes stored in memory : ", max_number_of_nodes_stored)
             break
+
+        number_of_explored_nodes_fei.append(len(explored))
+        number_of_nodes_fei.append(max_number_of_nodes_stored)
 
         length = 0;
         length_limit += 1
