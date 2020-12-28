@@ -7,13 +7,18 @@ def dfs_algorithm(puzzle):
     frontier = [Node(None, puzzle, [puzzle])]
     temp_frontier = []
     solution_node = None
+    max_number_of_nodes_stored = 0
 
     while frontier:
-        current = frontier.pop(0)
-        for node in current.path:
-            node.render()
+        #Calculate the maximum number of nodes stored in memory (frontier)
+        if max_number_of_nodes_stored < len(frontier):
+            max_number_of_nodes_stored = len(frontier)
 
-        print("******")
+        current = frontier.pop(0)
+        # for node in current.path:
+        #     node.render()
+
+        # print("******")
 
         if current.state.puzzle == current.state.goal_state:
             solution_node = current
@@ -38,6 +43,8 @@ def dfs_algorithm(puzzle):
     print(solution_node.path)
     for node in solution_node.path:
         node.render()
+    print("The total number of expanded nodes : ", len(expanded))
+    print("The maximum number of nodes stored in memory : ", max_number_of_nodes_stored)
 
 
 def isInExpanded(current, expanded):

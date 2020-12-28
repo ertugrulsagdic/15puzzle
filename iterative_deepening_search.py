@@ -20,12 +20,17 @@ def iterative_deepening_algorithm(puzzle):
     depth_limit = 1
     solution_node = None
     isSolved = False
+    max_number_of_nodes_stored = 0
+
     while 1:
         expanded = []
         frontier = [Node(None, puzzle, [puzzle], depth)]
         temp_frontier = []
 
         while frontier:
+            #Calculate the maximum number of nodes stored in memory (frontier)
+            if max_number_of_nodes_stored < len(frontier):
+                max_number_of_nodes_stored = len(frontier)
 
             current = frontier.pop(0)
             # for node in current.path:
@@ -64,6 +69,8 @@ def iterative_deepening_algorithm(puzzle):
             print(solution_node.path)
             for node in solution_node.path:
                 node.render()
+            print("The total number of expanded nodes : ", len(expanded))
+            print("The maximum number of nodes stored in memory : ", max_number_of_nodes_stored)
             break
         depth = 0
         depth_limit += 1
