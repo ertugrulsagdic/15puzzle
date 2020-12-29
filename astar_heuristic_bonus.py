@@ -1,4 +1,3 @@
-from puzzle15 import *
 from node import *
 import math
 
@@ -63,18 +62,9 @@ def astar_algorithm_bonus_diagonal_distance(puzzle):
             new_path = current.path + [action[0]]
             frontier.append(Node(parent=current, state=action[0], path=new_path, g=g, h=h))
 
-    print(solution_node.path)
     for node in solution_node.path:
         node.render()
+    print("The cost of the solution found", solution_node.g)
     print("The total number of expanded nodes : ", len(explored))
     print("The maximum number of nodes stored in memory : ", max_number_of_nodes_stored)
 
-
-def main():
-    puzzle = Puzzle15(puzzle=[[1, 3, 5, 4], [2, 13, 14, 15], [11, 12, 9, 6], [0, 10, 8, 7]],
-                      goal_state=[[1, 2, 3, 4], [12, 13, 14, 5], [11, 0, 15, 6], [10, 9, 8, 7]])
-    astar_algorithm_bonus_diagonal_distance(puzzle)
-
-
-if __name__ == '__main__':
-    main()

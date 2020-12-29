@@ -4,7 +4,7 @@ from node import *
 
 def dfs_algorithm(puzzle):
     expanded = []
-    frontier = [Node(None, puzzle, [puzzle])]
+    frontier = [Node(None, puzzle, [puzzle], 0)]
     temp_frontier = []
     solution_node = None
     max_number_of_nodes_stored = 0
@@ -33,8 +33,13 @@ def dfs_algorithm(puzzle):
             if isInExpanded(action[0], expanded):
                 continue
 
+            if current.parent == None:
+                g = action[1]
+            else:
+                g = current.parent.g + action[1]
+
             new_path = current.path + [action[0]]
-            temp_frontier.append(Node(parent=current, state=action[0], path=new_path))
+            temp_frontier.append(Node(parent=current, state=action[0], path=new_path, g=g))
 
         frontier = temp_frontier + frontier
         temp_frontier = []

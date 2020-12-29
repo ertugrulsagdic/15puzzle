@@ -1,9 +1,12 @@
 class Puzzle15:
     def __init__(self, puzzle, goal_state):
+        #state of the puzzle
         self.puzzle = puzzle
+
         self.number_of_rows = len(puzzle)
         self.number_of_columns = len(puzzle[0])
 
+        #goal state
         # 0 is the blank space
         self.goal_state = goal_state
 

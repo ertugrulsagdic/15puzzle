@@ -44,19 +44,13 @@ def uniform_cost_search(puzzle):
             else:
                 g = current.parent.g + action[1]
             new_path = current.path + [action[0]]
-            frontier.append(Node(parent=current, state=action[0], path=new_path, g=g , h=0))
+            frontier.append(Node(parent=current, state=action[0], path=new_path, g=g, h=0))
 
-    print(solution_node.path)
+
     for node in solution_node.path:
         node.render()
+    print("The cost of the solution found", solution_node.g)
     print("The total number of expanded nodes : ", len(expanded))
     print("The maximum number of nodes stored in memory : ", max_number_of_nodes_stored)
 
-def main():
-    puzzle = Puzzle15(puzzle=[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]], goal_state=[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 0, 14, 15]])
-    uniform_cost_search(puzzle)
-
-if __name__ == '__main__':
-    main()
-
-
+    return solution_node, len(expanded), max_number_of_nodes_stored

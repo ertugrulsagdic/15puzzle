@@ -1,10 +1,11 @@
 from puzzle15 import *
 class Node:
-    def __init__(self, parent=None, state=None, path=None, depth=0):
+    def __init__(self, parent=None, state=None, path=None, depth=0, g=0):
         self.parent = parent
         self.state = state
         self.path = path
         self.depth = depth
+        self.g = g
 
     def __eq__(self, obj):
         try:
@@ -24,7 +25,7 @@ def iterative_deepening_algorithm(puzzle):
 
     while 1:
         expanded = []
-        frontier = [Node(None, puzzle, [puzzle], depth)]
+        frontier = [Node(None, puzzle, [puzzle], depth, 0)]
         temp_frontier = []
 
         while frontier:
@@ -58,8 +59,13 @@ def iterative_deepening_algorithm(puzzle):
                 if isInExpanded(action[0], expanded):
                     continue
 
+                if current.parent == None:
+                    g = action[1]
+                else:
+                    g = current.parent.g + action[1]
+
                 new_path = current.path + [action[0]]
-                temp_frontier.append(Node(parent=current, state=action[0], path=new_path, depth=depth))
+                temp_frontier.append(Node(parent=current, state=action[0], path=new_path, depth=depth, g=g))
 
             frontier = temp_frontier + frontier
             temp_frontier = []
@@ -83,13 +89,3 @@ def isInExpanded(current, expanded):
             inExpanded = True
 
     return inExpanded
-
-
-def main():
-    puzzle = Puzzle15(puzzle=[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]], goal_state=[[1, 2, 0, 3], [5, 6, 7, 4], [9, 10, 11, 8], [13, 14, 15, 12]])
-
-    iterative_deepening_algorithm(puzzle)
-
-
-if __name__ == '__main__':
-    main()
