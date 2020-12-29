@@ -31,7 +31,7 @@ def call_algorithms(depth_limited_graph):
     uniform_cost_search(depth_limited_graph)
 
 def main():
-    goal_puzzle = Puzzle15(puzzle=[[1, 3, 5, 4], [2, 13, 14, 15], [11, 12, 9, 6], [0, 10, 8, 7]],
+    goal_puzzle = Puzzle15(puzzle=[[1, 2, 3, 4], [12, 13, 14, 5], [11, 0, 15, 6], [10, 9, 8, 7]],
                            goal_state=[[1, 2, 3, 4], [12, 13, 14, 5], [11, 0, 15, 6], [10, 9, 8, 7]])
 
     random_puzzle_solution_depth_2 = []
@@ -47,7 +47,6 @@ def main():
 
     for i in range(0, 10):
         random_puzzle_solution_depth_2.append(generate_random_instance_of_puzzle(goal_puzzle, 2))
-        print(random_puzzle_solution_depth_2[i].render())
         random_puzzle_solution_depth_4.append(generate_random_instance_of_puzzle(goal_puzzle, 4))
         random_puzzle_solution_depth_6.append(generate_random_instance_of_puzzle(goal_puzzle, 6))
         random_puzzle_solution_depth_8.append(generate_random_instance_of_puzzle(goal_puzzle, 8))
