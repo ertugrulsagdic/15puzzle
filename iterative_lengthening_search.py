@@ -45,7 +45,7 @@ def iterative_lengthening_search(puzzle, send_end):
             current = frontier.pop(index_of_min)
 
             if current.state.puzzle == current.state.goal_state:
-                is_solved = True;
+                is_solved = True
                 solution_node = current
                 break
 

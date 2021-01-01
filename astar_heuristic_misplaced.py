@@ -55,7 +55,6 @@ def astar_algorithm_misplaced(puzzle, send_end):
                 g = action[1]
             else:
                 g = current.g + action[1]
-            print(action[0], g)
             new_path = current.path + [action[0]]
             frontier.append(Node(parent=current, state=action[0], path=new_path, g=g , h=h))
 
