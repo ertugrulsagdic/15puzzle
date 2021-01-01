@@ -1,13 +1,12 @@
-from puzzle15 import *
 import math
 
 
 class Node:
-    def __init__(self, parent=None, state=None, path=None, length=0):
+    def __init__(self, parent=None, state=None, path=None, g=0):
         self.parent = parent
         self.state = state
         self.path = path
-        self.length = length
+        self.g = g
 
     def __eq__(self, obj):
         try:
@@ -19,17 +18,15 @@ class Node:
             return False
 
 
-def iterative_lengthening_search(puzzle):
-    length = 0
+def iterative_lengthening_search(puzzle, send_end):
+    g = 0
     length_limit = 0
     solution_node = None
     is_solved = False
-    number_of_explored_nodes_fei = []
-    number_of_nodes_fei = []
 
     while 1:
         explored = []
-        frontier = [Node(None, puzzle, [puzzle], length)]
+        frontier = [Node(None, puzzle, [puzzle], g)]
         max_number_of_nodes_stored = 0
 
         while frontier:
@@ -41,14 +38,11 @@ def iterative_lengthening_search(puzzle):
             index_of_min = 0
             for i in range(len(frontier)):
                 node = frontier[i]
-                if node.length < minn:
-                    minn = node.length
+                if node.g < minn:
+                    minn = node.g
                     index_of_min = i
 
             current = frontier.pop(index_of_min)
-
-            if (current.length >= length_limit):
-                continue
 
             if current.state.puzzle == current.state.goal_state:
                 is_solved = True;
@@ -65,24 +59,27 @@ def iterative_lengthening_search(puzzle):
             explored.append(current)
             actions = current.state.get_possible_actions()
             for action in actions:
+                if action[0].puzzle in explored:
+                    continue
                 if current.parent == None:
-                    length = action[1]
+                    g = action[1]
                 else:
-                    length = current.parent.length + action[1]
-                new_path = current.path + [action[0]]
-                frontier.append(Node(parent=current, state=action[0], path=new_path, length=length))
+                    g = current.g + action[1]
+                if g <= length_limit:
+                    new_path = current.path + [action[0]]
+                    frontier.append(Node(parent=current, state=action[0], path=new_path, g=g))
+                else:
+                    continue
 
         if is_solved:
             print("----------SOLUTION--------")
             for node in solution_node.path:
                 node.render()
-            print("The cost of the solution found", solution_node.length)
+            print("The cost of the solution found", solution_node.g)
             print("The total number of expanded nodes : ", len(explored))
             print("The maximum number of nodes stored in memory : ", max_number_of_nodes_stored)
+            send_end.send([solution_node, len(explored), max_number_of_nodes_stored])
             break
 
-        number_of_explored_nodes_fei.append(len(explored))
-        number_of_nodes_fei.append(max_number_of_nodes_stored)
-
-        length = 0;
         length_limit += 1
+

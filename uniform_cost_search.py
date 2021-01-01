@@ -38,11 +38,13 @@ def uniform_cost_search(puzzle, send_end):
         expanded.append(current)
         actions = current.state.get_possible_actions()
         for action in actions:
+            if action[0].puzzle in expanded:
+                continue
             g = 0
             if current.parent == None:
                 g = action[1]
             else:
-                g = current.parent.g + action[1]
+                g = current.g + action[1]
             new_path = current.path + [action[0]]
             frontier.append(Node(parent=current, state=action[0], path=new_path, g=g, h=0))
 
