@@ -1,4 +1,3 @@
-from puzzle15 import *
 from node import *
 
 def bfs_algorithm(puzzle, send_end):

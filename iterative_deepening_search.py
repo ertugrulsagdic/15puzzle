@@ -1,4 +1,3 @@
-from puzzle15 import *
 class Node:
     def __init__(self, parent=None, state=None, path=None, depth=0, g=0):
         self.parent = parent
