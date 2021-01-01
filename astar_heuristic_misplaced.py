@@ -11,7 +11,7 @@ def heuristic_misplaced(puzzle):
     
     return total_number_of_misplaced
 
-def astar_algorithm_misplaced(puzzle):
+def astar_algorithm_misplaced(puzzle, send_end):
     expanded = []
     frontier = [Node(None, puzzle, [puzzle], 0, heuristic_misplaced(puzzle))]
     solution_node = None
@@ -47,11 +47,15 @@ def astar_algorithm_misplaced(puzzle):
         expanded.append(current)
         actions = current.state.get_possible_actions()
         for action in actions:
+            if action[0].puzzle in expanded:
+                continue
             h = heuristic_misplaced(action[0])
+            g = 0
             if current.parent == None:
                 g = action[1]
             else:
-                g = current.parent.g + action[1]
+                g = current.g + action[1]
+            print(action[0], g)
             new_path = current.path + [action[0]]
             frontier.append(Node(parent=current, state=action[0], path=new_path, g=g , h=h))
 
@@ -60,4 +64,6 @@ def astar_algorithm_misplaced(puzzle):
     print("The cost of the solution found", solution_node.g)
     print("The total number of expanded nodes : ", len(expanded))
     print("The maximum number of nodes stored in memory : ", max_number_of_nodes_stored)
+
+    send_end.send([solution_node, len(expanded), max_number_of_nodes_stored])
 
