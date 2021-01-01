@@ -79,7 +79,7 @@ def main():
         for graph in puzzle_bundle:
             counter = 0
             recv_end, send_end = multiprocessing.Pipe(False)
-            p = multiprocessing.Process(target=uniform_cost_search, args=(graph, send_end))
+            p = multiprocessing.Process(target=astar_algorithm_misplaced, args=(graph, send_end))
             p.start()
 
             while counter < time_limit_cycle:

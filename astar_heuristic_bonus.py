@@ -54,11 +54,13 @@ def astar_algorithm_bonus_diagonal_distance(puzzle):
         explored.append(current)
         actions = current.state.get_possible_actions()
         for action in actions:
+            if action[0].puzzle in explored:
+                continue
             h = heuristic_diagonal_distance(action[0])
             if current.parent == None:
                 g = action[1]
             else:
-                g = current.parent.g + action[1]
+                g = current.g + action[1]
             new_path = current.path + [action[0]]
             frontier.append(Node(parent=current, state=action[0], path=new_path, g=g, h=h))
 
