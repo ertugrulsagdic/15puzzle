@@ -68,8 +68,11 @@ def main():
     puzzle_bundles.append(random_puzzle_solution_depth_24)
     puzzle_bundles.append(random_puzzle_solution_depth_28)
 
+    depths = (2,4,6,8,10,12,16,20,24,28)
+
     avg_expanded_nodes = []
     avg_max_number_of_nodes_stored = []
+    depth_counter = 0
 
     for puzzle_bundle in puzzle_bundles:
         total_expanded_nodes = 0
@@ -79,7 +82,7 @@ def main():
         for graph in puzzle_bundle:
             counter = 0
             recv_end, send_end = multiprocessing.Pipe(False)
-            p = multiprocessing.Process(target=uniform_cost_search, args=(graph, send_end))
+            p = multiprocessing.Process(target=iterative_deepening_algorithm, args=(graph, send_end))
             p.start()
 
             while counter < time_limit_cycle:
@@ -119,6 +122,9 @@ def main():
         print("average max number of nodes stored", avg_stored)
 
     print("---------------------------------------------------------")
+    print("Current depth = ")
+    print(depths[depth_counter])
+    depth_counter += 1
     print("Average expanded nodes")
     for i in range(0, len(avg_expanded_nodes)):
         print(avg_expanded_nodes[i])

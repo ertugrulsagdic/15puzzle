@@ -16,7 +16,7 @@ class Node:
         except:
             return False
 
-def iterative_deepening_algorithm(puzzle):
+def iterative_deepening_algorithm(puzzle, send_end):
     depth = 0
     depth_limit = 1
     solution_node = None
@@ -62,7 +62,7 @@ def iterative_deepening_algorithm(puzzle):
                 if current.parent == None:
                     g = action[1]
                 else:
-                    g = current.parent.g + action[1]
+                    g = current.g + action[1]
 
                 new_path = current.path + [action[0]]
                 temp_frontier.append(Node(parent=current, state=action[0], path=new_path, depth=depth, g=g))
@@ -80,6 +80,8 @@ def iterative_deepening_algorithm(puzzle):
             break
         depth = 0
         depth_limit += 1
+
+    send_end.send([solution_node, len(expanded), max_number_of_nodes_stored])
 
 
 def isInExpanded(current, expanded):

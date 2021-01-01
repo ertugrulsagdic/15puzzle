@@ -2,7 +2,7 @@ from puzzle15 import *
 from node import *
 
 
-def dfs_algorithm(puzzle):
+def dfs_algorithm(puzzle, send_end):
     expanded = []
     frontier = [Node(None, puzzle, [puzzle], 0)]
     temp_frontier = []
@@ -36,7 +36,7 @@ def dfs_algorithm(puzzle):
             if current.parent == None:
                 g = action[1]
             else:
-                g = current.parent.g + action[1]
+                g = current.g + action[1]
 
             new_path = current.path + [action[0]]
             temp_frontier.append(Node(parent=current, state=action[0], path=new_path, g=g))
@@ -51,6 +51,7 @@ def dfs_algorithm(puzzle):
     print("The total number of expanded nodes : ", len(expanded))
     print("The maximum number of nodes stored in memory : ", max_number_of_nodes_stored)
 
+    send_end.send([solution_node, len(expanded), max_number_of_nodes_stored])
 
 def isInExpanded(current, expanded):
     inExpanded = False
@@ -59,13 +60,3 @@ def isInExpanded(current, expanded):
             inExpanded = True
 
     return inExpanded
-
-
-def main():
-    puzzle = Puzzle15(puzzle=[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 0]], goal_state=[[1, 2, 0, 3], [5, 6, 7, 4], [9, 10, 11, 8], [13, 14, 15, 12]])
-
-    dfs_algorithm(puzzle)
-
-
-if __name__ == '__main__':
-    main()
