@@ -27,7 +27,7 @@ def call_algorithms(depth_limited_graph):
 
 def main():
     # it waits 10 seconds if the time limit cycle is 6 then it will wait 1 minutes
-    time_limit_cycle = 1
+    time_limit_cycle = 30
 
     goal_puzzle = Puzzle15(puzzle=[[1, 2, 3, 4], [12, 13, 14, 5], [11, 0, 15, 6], [10, 9, 8, 7]],
                            goal_state=[[1, 2, 3, 4], [12, 13, 14, 5], [11, 0, 15, 6], [10, 9, 8, 7]])
