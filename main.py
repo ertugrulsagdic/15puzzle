@@ -66,12 +66,9 @@ def main():
     puzzle_bundles.append(random_puzzle_solution_depth_24)
     puzzle_bundles.append(random_puzzle_solution_depth_28)
 
-<<<<<<< HEAD
     depths = (2,4,6,8,10,12,16,20,24,28)
-=======
     # it waits 10 seconds if the time limit cycle is 6 then it will wait 1 minutes
-    time_limit_cycle = 30
->>>>>>> c1d510156d09094a64834675aabdf75977ba272c
+    time_limit_cycle = 60
 
     avg_expanded_nodes = []
     avg_max_number_of_nodes_stored = []
@@ -85,11 +82,7 @@ def main():
         for graph in puzzle_bundle:
             counter = 0
             recv_end, send_end = multiprocessing.Pipe(False)
-<<<<<<< HEAD
             p = multiprocessing.Process(target=iterative_deepening_algorithm, args=(graph, send_end))
-=======
-            p = multiprocessing.Process(target=astar_algorithm_misplaced, args=(graph, send_end))
->>>>>>> c1d510156d09094a64834675aabdf75977ba272c
             p.start()
 
             while counter < time_limit_cycle:
