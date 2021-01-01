@@ -68,7 +68,7 @@ def main():
 
     depths = (2,4,6,8,10,12,16,20,24,28)
     # it waits 10 seconds if the time limit cycle is 6 then it will wait 1 minutes
-    time_limit_cycle = 30
+    time_limit_cycle = 60
 
     avg_expanded_nodes = []
     avg_max_number_of_nodes_stored = []
