@@ -1,5 +1,6 @@
 from node import *
 import math
+from puzzle15 import *
 
 def heuristic_city_block_distance(puzzle):
     total_distance = 0
@@ -9,7 +10,7 @@ def heuristic_city_block_distance(puzzle):
     
     return total_distance
 
-def astar_algorithm_city_block_distance(puzzle):
+def astar_algorithm_city_block_distance(puzzle, send_end):
     expanded = []
     frontier = [Node(None, puzzle, [puzzle], 0, heuristic_city_block_distance(puzzle))]
     solution_node = None
@@ -62,4 +63,5 @@ def astar_algorithm_city_block_distance(puzzle):
     print("The total number of expanded nodes : ", len(expanded))
     print("The maximum number of nodes stored in memory : ", max_number_of_nodes_stored)
 
+    send_end.send([solution_node, len(expanded), max_number_of_nodes_stored])
 

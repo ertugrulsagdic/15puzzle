@@ -18,8 +18,13 @@ def heuristic_diagonal_distance(puzzle):
                         diagonal_distance += d1 * max(dx, dy) + (d2 - d1) * min(dx, dy)
     return diagonal_distance
 
+def linear_conflict_heuristic(puzzle):
+    pass
+    # for row in puzzle.puzzle:
+    #     lc = 0
+    #     for tj in row:
 
-def astar_algorithm_bonus_diagonal_distance(puzzle):
+def astar_algorithm_bonus_diagonal_distance(puzzle, send_end):
     explored = []
     frontier = [Node(None, puzzle, [puzzle], 0, heuristic_diagonal_distance(puzzle))]
     solution_node = None
@@ -69,4 +74,6 @@ def astar_algorithm_bonus_diagonal_distance(puzzle):
     print("The cost of the solution found", solution_node.g)
     print("The total number of expanded nodes : ", len(explored))
     print("The maximum number of nodes stored in memory : ", max_number_of_nodes_stored)
+
+    send_end.send([solution_node, len(explored), max_number_of_nodes_stored])
 
