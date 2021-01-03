@@ -68,8 +68,6 @@ def mainpart2():
 
         for process in jobs:
             process.join()
-
-        result_list = [x.recv() for x in pipe_list]
         puzzle_name_list_counter += 1
 
 
